@@ -54,10 +54,22 @@ namespace Capa_Negocio
             tabla = objetoCD.SumaBbva();
             return tabla;
         }
+        public DataTable SumaBbvaDomingo()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.SumaBbvaDomingo();
+            return tabla;
+        }
         public DataTable SumaBcp()
         {
             DataTable tabla = new DataTable();
             tabla = objetoCD.SumaBcp();
+            return tabla;
+        }
+        public DataTable SumaBcpLunes()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.SumaBcpLunes();
             return tabla;
         }
         public DataTable SumaInterbank()
@@ -66,10 +78,22 @@ namespace Capa_Negocio
             tabla = objetoCD.SumaInterbank();
             return tabla;
         }
+        public DataTable SumaInterbankDomingo()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.SumaInterbankDomingo();
+            return tabla;
+        }
         public DataTable SumaScotiabank()
         {
             DataTable tabla = new DataTable();
             tabla = objetoCD.SumaScotiabank();
+            return tabla;
+        }
+        public DataTable SumaScotiabankDomingo()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.SumaScotiabankDomingo();
             return tabla;
         }
         public void insertarDat(string abonado, string fecha, string limite, string dinero)

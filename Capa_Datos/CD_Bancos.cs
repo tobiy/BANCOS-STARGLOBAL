@@ -13,6 +13,8 @@ namespace Capa_Datos{
         SqlDataReader leer;
         DataTable tabla = new DataTable();
         string fecha = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2))";
+        string FechaDomingo = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
+        string FechaBcpLunes = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME,@total3 float,@total4 float,@suma_total1 float,@FEC_REG1 DATETIME,@suma_total2 float SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2)) SET @FEC_REG1 = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
 
         public void EditarTodasFechas()
         {           
@@ -27,7 +29,7 @@ namespace Capa_Datos{
         public void EditarTodasFechasSolo()
         {
             comando.Connection = conexionA.AbrirConexionA();
-            comando.CommandText = "update TMP_BCPR set col004 ='20181013'";
+            comando.CommandText = "update TMP_BCPR set col004 =(SELECT LTRIM(RTRIM(YEAR(GETDATE())))+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
             comando.CommandType = CommandType.Text;
 
             comando.ExecuteNonQuery();
@@ -110,10 +112,37 @@ namespace Capa_Datos{
             return tabla;
         }
 
+        public DataTable SumaBbvaDomingo()
+        {
+            comando.Connection = conexionA.AbrirConexionA();
+            comando.CommandText = FechaDomingo + "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 76 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 403 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";
+            comando.CommandType = CommandType.Text;
+            leer = comando.ExecuteReader();
+
+            tabla.Load(leer);
+
+            conexionA.CerrarConexionA();
+
+            return tabla;
+        }
+
         public DataTable SumaBcp()
         {
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = fecha+ "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 55 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 387 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";
+            comando.CommandType = CommandType.Text;
+            leer = comando.ExecuteReader();
+
+            tabla.Load(leer);
+
+            conexionA.CerrarConexionA();
+
+            return tabla;
+        }
+        public DataTable SumaBcpLunes()
+        {
+            comando.Connection = conexionA.AbrirConexionA();
+            comando.CommandText = FechaBcpLunes + "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 55 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 387 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @total3=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 55 and  dt_mov = @FEC_REG1 and cd_mov in ( 3) SELECT @total4=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 387 and  dt_mov = @FEC_REG1 and cd_mov in ( 3) SET @suma_total1 = @total3+@total4 SET @suma_total2 = @suma_total+@suma_total1 select @suma_total2";
             comando.CommandType = CommandType.Text;
             leer = comando.ExecuteReader();
 
@@ -138,10 +167,38 @@ namespace Capa_Datos{
             return tabla;
         }
 
+        public DataTable SumaInterbankDomingo()
+        {
+            comando.Connection = conexionA.AbrirConexionA();
+            comando.CommandText = FechaDomingo + "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 63 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 391 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";
+            comando.CommandType = CommandType.Text;
+            leer = comando.ExecuteReader();
+
+            tabla.Load(leer);
+
+            conexionA.CerrarConexionA();
+
+            return tabla;
+        }
+
         public DataTable SumaScotiabank()
         {
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = fecha+ "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 86 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 414 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";           
+            comando.CommandType = CommandType.Text;
+            leer = comando.ExecuteReader();
+
+            tabla.Load(leer);
+
+            conexionA.CerrarConexionA();
+
+            return tabla;
+        }
+
+        public DataTable SumaScotiabankDomingo()
+        {
+            comando.Connection = conexionA.AbrirConexionA();
+            comando.CommandText = FechaDomingo + "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 86 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 414 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";
             comando.CommandType = CommandType.Text;
             leer = comando.ExecuteReader();
 

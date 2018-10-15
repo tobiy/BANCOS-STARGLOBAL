@@ -19,13 +19,11 @@ namespace Capa_Presentacion
 
         private void BtnDomingo_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void BtnLunes_Click(object sender, EventArgs e)
-        {
-
-        }
+            FormBancosDomingo frm = new FormBancosDomingo();
+            this.Hide();
+            frm.ShowDialog();
+            this.Close();
+        }        
 
         private void BtnSemana_Click(object sender, EventArgs e)
         {
@@ -33,6 +31,11 @@ namespace Capa_Presentacion
             this.Hide();
             frm.ShowDialog();
             this.Close();
+        }
+
+        private void BtnCerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

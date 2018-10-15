@@ -5,10 +5,8 @@ using System.IO;
 
 namespace Capa_Presentacion
 {
-    public partial class FormBancos : Form
+    public partial class FormBancosDomingo : Form
     {
-        //declarar dos varialbes para poder hacer el llamado de datos de la capa de negocio
-
         CN_Bancos objetoCN = new CN_Bancos();
         CN_Aqp_Tacna objetos = new CN_Aqp_Tacna();
 
@@ -17,31 +15,32 @@ namespace Capa_Presentacion
         int cabecera = 0;
         int detalle = 0;
         int contador = 0;
-        int lineas = 0 ;
+        int lineas = 0;
         int pie = 0;
         String fecha_cabecera = "";
         Double monto = 0;
         string abonado = "";
         string fecha = "";
         string limite = "";
-        string dinero = "";       
+        string dinero = "";
         string dia = "lunes";
         int a = 0;
-        
 
         //creacion de variables para dar formato a la fecha 
 
-        DateTime carpeta = DateTime.Today.AddDays(0);
-        DateTime carpeta1 = DateTime.Today.AddDays(-1);      
+        DateTime carpeta = DateTime.Today.AddDays(-1);
+        DateTime carpeta1 = DateTime.Today.AddDays(-2);        
 
-        public FormBancos()
+        public FormBancosDomingo()
         {
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void FormBancosDomingo_Load(object sender, EventArgs e)
         {
-           
-        }
+
+        }   
+
         //inicializacion de la calse error para mostar cantidad de errores en el proceso de bancos
         private void ErrorAqp()
         {
@@ -61,25 +60,20 @@ namespace Capa_Presentacion
             dataGridView1.DataSource = objeto.EliminarDatosAq();
         }
         //calses creadas para poder la cantidad de pagos que se realizan en cada uno de los bancos
-        private void SumaBbva()
+        private void SumaBbvaDomingo()
         {
             CN_Bancos objeto = new CN_Bancos();
-            dataGridView1.DataSource = objeto.SumaBbva();
+            dataGridView1.DataSource = objeto.SumaBbvaDomingo();
+        }        
+        private void SumaInterbankDomingo()
+        {
+            CN_Bancos objeto = new CN_Bancos();
+            dataGridView1.DataSource = objeto.SumaInterbankDomingo();
         }
-        private void SumaBcp()
+        private void SumaScotiabankDomingo()
         {
             CN_Bancos objeto = new CN_Bancos();
-            dataGridView1.DataSource = objeto.SumaBcp();
-        }
-        private void SumaInterbank()
-        {
-            CN_Bancos objeto = new CN_Bancos();
-            dataGridView1.DataSource = objeto.SumaInterbank();
-        }
-        private void SumaScotiabank()
-        {
-            CN_Bancos objeto = new CN_Bancos();
-            dataGridView1.DataSource = objeto.SumaScotiabank();
+            dataGridView1.DataSource = objeto.SumaScotiabankDomingo();
         }
 
         private void SelectDatosTacna()
@@ -128,7 +122,7 @@ namespace Capa_Presentacion
                                 dinero = Convert.ToString(linea.Substring(84, 11));
 
                                 objetoCN.insertarDat(abonado, fecha, limite, dinero);
-                              
+
                                 break;
 
                             case '3':
@@ -150,9 +144,10 @@ namespace Capa_Presentacion
             {
                 Lbl_Error_archivo.Text = "Nombre del Archivo no coincise debe abrir Nuevo documento de texto";
                 LimpiarLbl();
-            }            
-            objetoCN.EditarTodoCampoFecha();            
+            }
             
+            objetoCN.EditarTodoCampoFechaSolo();
+           
             objetoCN.CeroBbva();
 
             objetos.EjecutarBbv();
@@ -182,7 +177,7 @@ namespace Capa_Presentacion
             var contarerror1 = Convert.ToInt32(contarerror);
             Lbl_Total_Error.Text = contarerror1.ToString();
 
-            SumaBbva();
+            SumaBbvaDomingo();
             var contarBbva = this.dataGridView1.CurrentCell.Value.ToString();
             var contarBbva1 = Convert.ToDouble(contarBbva);
             Lbl_Monto_Sapiens.Text = contarBbva1.ToString();
@@ -194,114 +189,12 @@ namespace Capa_Presentacion
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
 
-        public void bancoBcp()
-        {
-            //verificacion de transformacion e incercin de datos si es el dia lunes
-            objetoCN.BorrarDat();
-            try
-            {
-                //ruta para leer el archivo de texto
-                string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\BCP\{0}\{1}\{2}\CDPG2225.TXT", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"));
-                //lectura de datos especificos delimitados por una matriz
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    while (sr.Peek() >= 0)
-                    {
-                        string linea = sr.ReadLine();
-                        char tipo = Convert.ToChar(linea.Substring(0, 1));
-                        switch (tipo)
-                        {
-                            //extraer detalle datos de la cabecera del txt
-                            case 'C':
-                                cabecera++;
-                                fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
-                                lineas = Convert.ToInt32(linea.Substring(23, 8));
-                                monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
-
-                                break;
-                            //extraer datos del cuerpo del txt
-                            case 'D':
-                                detalle++;
-                                abonado = Convert.ToString(linea.Substring(14, 13));
-                                fecha = Convert.ToString(linea.Substring(57, 8));
-                                limite = Convert.ToString(linea.Substring(65, 8));
-                                dinero = Convert.ToString(linea.Substring(74, 14));
-
-                                objetoCN.insertarDat(abonado, fecha, limite, dinero);
-
-                                break;
-                            default:
-                                contador++;
-                                break;
-                        }
-                    }
-                }
-                //mostar datos extraidos del txt para ver los montos y el numero de lineas                    
-                Lbl_Total.Text = lineas.ToString();
-                Lbl_Monto_Consolidado.Text = monto.ToString();
-            }
-            //mensaje de comprovacion error al seleccionar el archivo txt
-            catch
-            {
-                Lbl_Error_archivo.Text = "Nombre del Archivo no coincide debe abrir CDPG2225";
-                LimpiarLbl();
-            }
-            
-            if (carpeta.ToString("dddd") == dia)
-            {
-                objetoCN.FechaBcp();
-            }
-            //ejecutar lo contenido en el else si no es dia lunes 
-            else
-            {                
-               objetoCN.EditarTodoCampoFecha();
-            } 
-            
-            //darle formato de insert a la tabla tmp_bcpr
-            objetoCN.CeroBcp();
-
-            objetos.EjecutarBc();
-
-            SelectDatosAqp();
-            var Contaraqp = this.dataGridView1.Rows.Count.ToString();
-            var totalaqp = Convert.ToInt32(Contaraqp);
-            var contaraqp = totalaqp - 1;
-            Lbl_Total_Aqp.Text = contaraqp.ToString();
-
-            objetos.EjecutarSpcasAq();
-
-            EliminarDatosAqp();
-
-            SelectDatosTacna();
-            var Contartacna = this.dataGridView1.Rows.Count.ToString();
-            var totaltacna = Convert.ToInt32(Contartacna);
-            var contartacna = totaltacna - 1;
-            Lbl_Total_Tacna.Text = contartacna.ToString();
-
-            objetos.EjecutarSpcasTacn();
-
-            EliminarDatosTacna();
-
-            ErrorAqp();
-            var contarerror = this.dataGridView1.CurrentCell.Value.ToString();
-            var contarerror1 = Convert.ToInt32(contarerror);
-            Lbl_Total_Error.Text = contarerror1.ToString();
-
-            SumaBcp();
-            var contarBcp = this.dataGridView1.CurrentCell.Value.ToString();
-            var contarBcp1 = Convert.ToDouble(contarBcp);
-            Lbl_Monto_Sapiens.Text = contarBcp1.ToString();
-
-            var restadito = monto - contarBcp1;
-            Lbl_Diferencia_Dinero.Text = restadito.ToString();
-
-            var TotalDeDatos = contaraqp + contartacna;
-            Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
-        }
+       
 
         public void bancoScotiabank()
         {
             objetoCN.BorrarDat();
+
             try
             {
                 string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\Scotiabank\{0}\{1}\{2}\sbp{3}.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"), carpeta1.ToString("MMdd"));
@@ -316,13 +209,11 @@ namespace Capa_Presentacion
                             case 'C':
                                 cabecera++;
                                 fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
-                                if (cabecera == 1)
-                                {
-                                    lineas = Convert.ToInt32(linea.Substring(23, 8));
-                                    monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
-                                }
-                                break;
+                                lineas = Convert.ToInt32(linea.Substring(23, 8));
+                                monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
 
+                                break;
+                            //extraer datos del cuerpo del txt
                             case 'D':
                                 detalle++;
                                 abonado = Convert.ToString(linea.Substring(14, 13));
@@ -349,7 +240,8 @@ namespace Capa_Presentacion
                 LimpiarLbl();
             }
 
-            objetoCN.EditarTodoCampoFecha();
+            objetoCN.EditarTodoCampoFechaSolo();
+
             objetoCN.CeroScotiabank();
 
             objetos.EjecutarScotiaban();
@@ -379,7 +271,7 @@ namespace Capa_Presentacion
             var contarerror1 = Convert.ToInt32(contarerror);
             Lbl_Total_Error.Text = contarerror1.ToString();
 
-            SumaScotiabank();
+            SumaScotiabankDomingo();
             var contarScotiabank = this.dataGridView1.CurrentCell.Value.ToString();
             var contarScotiabank1 = Convert.ToDouble(contarScotiabank);
             Lbl_Monto_Sapiens.Text = contarScotiabank1.ToString();
@@ -460,7 +352,7 @@ namespace Capa_Presentacion
                 }
 
                 Lbl_Total.Text = lineas.ToString();
-                Lbl_Monto_Consolidado.Text = monto.ToString();               
+                Lbl_Monto_Consolidado.Text = monto.ToString();
             }
             catch
             {
@@ -497,7 +389,7 @@ namespace Capa_Presentacion
             var contarerror1 = Convert.ToInt32(contarerror);
             Lbl_Total_Error.Text = contarerror1.ToString();
 
-            SumaInterbank();
+            SumaInterbankDomingo();
             var contarInterbank = this.dataGridView1.CurrentCell.Value.ToString();
             var contarInterbank1 = Convert.ToDouble(contarInterbank);
             Lbl_Monto_Sapiens.Text = contarInterbank1.ToString();
@@ -508,32 +400,14 @@ namespace Capa_Presentacion
             var TotalDeDatos = contaraqp + contartacna;
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
-       
-        private void BtnBbva_Click(object sender, EventArgs e)
-        {
-            bancoBbva();            
-        }
-        private void BtnBcp_Click(object sender, EventArgs e)
-        {
-            bancoBcp();           
-        }
-        private void BtnInterbank_Click(object sender, EventArgs e)
-        {
-            bancoInterbank();        
-        }
-        private void BtnScotiabank_Click(object sender, EventArgs e)
-        {
-            bancoScotiabank();
-        }
-
-        private void btn_ejeee_Click(object sender, EventArgs e)
-        {
-            bancoScotiabank();
-        }
-
         public void LimpiarLbl()
         {
             Lbl_Total.Text = "";
+        }
+
+        private void BtnCerrar_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void siguiente_Click(object sender, EventArgs e)
