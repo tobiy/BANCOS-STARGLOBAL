@@ -30,6 +30,7 @@ namespace Capa_Datos{
         {
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "update TMP_BCPR set col004 =(SELECT LTRIM(RTRIM(YEAR(GETDATE())))+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
+            //comando.CommandText = "update TMP_BCPR set col004 ='20181020'";
             comando.CommandType = CommandType.Text;
 
             comando.ExecuteNonQuery();
@@ -103,6 +104,7 @@ namespace Capa_Datos{
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = fecha+ "SELECT @total1=isnull(-SUM(vl_mov),0) FROM MOV_CONTARECEBER where CD_AGTCOB = 76 and  dt_mov = @FEC_REG and cd_mov in ( 3) SELECT @total2=isnull(-SUM(vl_mov),0) FROM [spnetsrvtac-bak].SapiensNet.[dbo].[MOV_CONTARECEBER] where CD_AGTCOB = 403 and  dt_mov = @FEC_REG and cd_mov in ( 3) SET @suma_total = @total1+@total2 SELECT @suma_total";
             comando.CommandType = CommandType.Text;
+            comando.CommandTimeout = 200;
             leer = comando.ExecuteReader();
 
             tabla.Load(leer);

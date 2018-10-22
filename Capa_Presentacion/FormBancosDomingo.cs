@@ -22,14 +22,12 @@ namespace Capa_Presentacion
         string abonado = "";
         string fecha = "";
         string limite = "";
-        string dinero = "";
-        string dia = "lunes";
-        int a = 0;
+        string dinero = "";   
 
         //creacion de variables para dar formato a la fecha 
 
-        DateTime carpeta = DateTime.Today.AddDays(-1);
-        DateTime carpeta1 = DateTime.Today.AddDays(-2);        
+        DateTime carpeta = DateTime.Today.AddDays(0);
+        DateTime carpeta1 = DateTime.Today.AddDays(-1);        
 
         public FormBancosDomingo()
         {
@@ -208,9 +206,13 @@ namespace Capa_Presentacion
                         {
                             case 'C':
                                 cabecera++;
-                                fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
-                                lineas = Convert.ToInt32(linea.Substring(23, 8));
-                                monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
+                                if (cabecera==1)
+                                {
+                                    fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
+                                    lineas = Convert.ToInt32(linea.Substring(23, 8));
+                                    monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
+                                }
+                                
 
                                 break;
                             //extraer datos del cuerpo del txt
@@ -299,11 +301,17 @@ namespace Capa_Presentacion
                         {
                             case 'S':
                                 cabecera++;
-                                if (cabecera == 2)
+                                try
                                 {
+                                    cabecera = 2;
                                     lineas = Convert.ToInt32(linea1.Substring(31, 8));
                                     monto = Convert.ToDouble(linea1.Substring(42, 12));
                                 }
+                                catch
+                                {
+
+                                }                                   
+                                
                                 break;
 
                             default:

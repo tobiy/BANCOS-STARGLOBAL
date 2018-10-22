@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Negocio;
+using System.IO;
 
 namespace Capa_Presentacion
 {
@@ -58,7 +59,7 @@ namespace Capa_Presentacion
             //Direccion de correo electronico que queremos que reciba una copia del mensaje
             mmsg.Bcc.Add("jnunez@lscvsystems.com,atovar@lscvsystems.com"); //Opcional
             //Cuerpo del Mensaje
-            mmsg.Body = "se corrio la cobranza con fecha: " + totalcobranza.ToString();
+            mmsg.Body = "Se Corrio la Cobranza de Arequipa y Tacna con Fecha: " + totalcobranza.ToString();
             mmsg.BodyEncoding = System.Text.Encoding.UTF8;
             mmsg.IsBodyHtml = false; //Si no queremos que se envíe como HTML
 
@@ -99,8 +100,29 @@ namespace Capa_Presentacion
 
         private void BtnCargarAqpTacna_Click(object sender, EventArgs e)
         {
+            objetos.CobranzaAqp();
+            objetos.CobranzaTacna();
             EnviarCorreo();
             
+        }
+        private void Dolares()
+        {
+            CN_Aqp_Tacna objeto = new CN_Aqp_Tacna();
+            dataGridDesconectadosAqp.DataSource = objeto.Dolar();
+        }
+
+        private void BtnDesconectadosAqp_Click(object sender, EventArgs e)
+        {
+            //froma de como generar txt para subida de bancos
+
+            //Dolares();
+            //TextWriter sw = new StreamWriter(@"C:\Users\arni_\OneDrive\Documentos\trabajo para hacer  star global\prueba\bbva11.txt");
+            //int rowcount = dataGridDesconectadosAqp.Rows.Count;
+            //for (int i = 0; i < rowcount - 1; i++)
+            //{
+            //    sw.WriteLine(dataGridDesconectadosAqp.Rows[i].Cells[0].Value.ToString());
+            //}
+            //sw.Close();     //Don't Forget Close the TextWriter Object(sw)
         }
     }
 }

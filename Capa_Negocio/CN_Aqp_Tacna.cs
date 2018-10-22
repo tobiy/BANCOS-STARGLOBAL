@@ -78,5 +78,20 @@ namespace Capa_Negocio
             tabla = objetoCD.FechaCobranza();
             return tabla;
         }
+        public void CobranzaAqp()
+        {
+            objetoCD.CobranzaAqp();
+        }
+        public void CobranzaTacna()
+        {
+            objetoCD.CobranzaTacna();
+        }
+
+        public DataTable Dolar()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.Dolares();
+            return tabla;
+        }
     }
 }

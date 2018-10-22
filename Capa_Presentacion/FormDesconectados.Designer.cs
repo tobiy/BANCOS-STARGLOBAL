@@ -85,6 +85,7 @@
             this.BtnDesconectadosAqp.TabIndex = 8;
             this.BtnDesconectadosAqp.Text = "Desconectados AQP";
             this.BtnDesconectadosAqp.UseVisualStyleBackColor = false;
+            this.BtnDesconectadosAqp.Click += new System.EventHandler(this.BtnDesconectadosAqp_Click);
             // 
             // label1
             // 

@@ -17,22 +17,24 @@ namespace Capa_Presentacion
         int cabecera = 0;
         int detalle = 0;
         int contador = 0;
-        int lineas = 0 ;
-        int pie = 0;
+        int lineas = 0;
+        int pie = 0;        
         String fecha_cabecera = "";
-        Double monto = 0;
+        Double monto = 0;      
         string abonado = "";
         string fecha = "";
         string limite = "";
-        string dinero = "";       
+        string dinero = "";
         string dia = "lunes";
-        int a = 0;
-        
+
 
         //creacion de variables para dar formato a la fecha 
 
         DateTime carpeta = DateTime.Today.AddDays(0);
-        DateTime carpeta1 = DateTime.Today.AddDays(-1);      
+        DateTime carpeta1 = DateTime.Today.AddDays(-1);
+
+        
+
 
         public FormBancos()
         {
@@ -102,7 +104,7 @@ namespace Capa_Presentacion
 
         public void bancoBbva()
         {
-            objetoCN.BorrarDat();
+            objetoCN.BorrarDat();           
             try
             {
                 string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\BBVA\{0}\{1}\{2}\Nuevo documento de texto.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"));
@@ -112,7 +114,6 @@ namespace Capa_Presentacion
                     {
                         string linea = sr.ReadLine();
                         char tipo = Convert.ToChar(linea.Substring(1, 1));
-                        string datos = linea.Substring(1);
                         switch (tipo)
                         {
                             case '1':
@@ -128,7 +129,7 @@ namespace Capa_Presentacion
                                 dinero = Convert.ToString(linea.Substring(84, 11));
 
                                 objetoCN.insertarDat(abonado, fecha, limite, dinero);
-                              
+
                                 break;
 
                             case '3':
@@ -139,20 +140,20 @@ namespace Capa_Presentacion
 
                             default:
                                 contador++;
-                                break;
+                                break;                
                         }
+                        Lbl_Total.Text = lineas.ToString();
+                        Lbl_Monto_Consolidado.Text = monto.ToString();
                     }
-                }
-                Lbl_Total.Text = lineas.ToString();
-                Lbl_Monto_Consolidado.Text = monto.ToString();
+                }                
             }
             catch
             {
                 Lbl_Error_archivo.Text = "Nombre del Archivo no coincise debe abrir Nuevo documento de texto";
                 LimpiarLbl();
-            }            
-            objetoCN.EditarTodoCampoFecha();            
-            
+            }
+            objetoCN.EditarTodoCampoFecha();
+
             objetoCN.CeroBbva();
 
             objetos.EjecutarBbv();
@@ -197,7 +198,7 @@ namespace Capa_Presentacion
         public void bancoBcp()
         {
             //verificacion de transformacion e incercin de datos si es el dia lunes
-            objetoCN.BorrarDat();
+            objetoCN.BorrarDat();            
             try
             {
                 //ruta para leer el archivo de texto
@@ -234,11 +235,11 @@ namespace Capa_Presentacion
                                 contador++;
                                 break;
                         }
+                        Lbl_Total.Text = lineas.ToString();
+                        Lbl_Monto_Consolidado.Text = monto.ToString();
                     }
-                }
-                //mostar datos extraidos del txt para ver los montos y el numero de lineas                    
-                Lbl_Total.Text = lineas.ToString();
-                Lbl_Monto_Consolidado.Text = monto.ToString();
+                }                 
+                
             }
             //mensaje de comprovacion error al seleccionar el archivo txt
             catch
@@ -246,17 +247,17 @@ namespace Capa_Presentacion
                 Lbl_Error_archivo.Text = "Nombre del Archivo no coincide debe abrir CDPG2225";
                 LimpiarLbl();
             }
-            
+
             if (carpeta.ToString("dddd") == dia)
             {
                 objetoCN.FechaBcp();
             }
             //ejecutar lo contenido en el else si no es dia lunes 
             else
-            {                
-               objetoCN.EditarTodoCampoFecha();
-            } 
-            
+            {
+                objetoCN.EditarTodoCampoFecha();
+            }
+
             //darle formato de insert a la tabla tmp_bcpr
             objetoCN.CeroBcp();
 
@@ -301,10 +302,12 @@ namespace Capa_Presentacion
 
         public void bancoScotiabank()
         {
-            objetoCN.BorrarDat();
+            objetoCN.BorrarDat();            
             try
             {
+                //ruta para leer el archivo de texto
                 string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\Scotiabank\{0}\{1}\{2}\sbp{3}.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"), carpeta1.ToString("MMdd"));
+                //lectura de datos especificos delimitados por una matriz
                 using (StreamReader sr = new StreamReader(path))
                 {
                     while (sr.Peek() >= 0)
@@ -313,16 +316,20 @@ namespace Capa_Presentacion
                         char tipo = Convert.ToChar(linea.Substring(0, 1));
                         switch (tipo)
                         {
+                            //extraer detalle datos de la cabecera del txt
                             case 'C':
-                                cabecera++;
-                                fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
-                                if (cabecera == 1)
+                                
+                                    cabecera ++;
+                                if (cabecera ==1)
                                 {
+                                    fecha_cabecera = Convert.ToString(linea.Substring(14, 8));
                                     lineas = Convert.ToInt32(linea.Substring(23, 8));
                                     monto = Convert.ToDouble(linea.Substring(32, 14)) / 100;
-                                }
+                                    break;
+                                }                               
+                    
                                 break;
-
+                            //extraer datos del cuerpo del txt
                             case 'D':
                                 detalle++;
                                 abonado = Convert.ToString(linea.Substring(14, 13));
@@ -337,18 +344,18 @@ namespace Capa_Presentacion
                             default:
                                 contador++;
                                 break;
-                        }
-                    }
+                        }                     
+                    }                    
                 }
                 Lbl_Total.Text = lineas.ToString();
                 Lbl_Monto_Consolidado.Text = monto.ToString();
             }
+            //mensaje de comprovacion error al seleccionar el archivo txt
             catch
-            {
+            {                
                 Lbl_Error_archivo.Text = string.Format("Nombre del Archivo no coincise debe abrir sbp{0}", carpeta1.ToString("MMdd"));
                 LimpiarLbl();
             }
-
             objetoCN.EditarTodoCampoFecha();
             objetoCN.CeroScotiabank();
 
@@ -392,7 +399,7 @@ namespace Capa_Presentacion
         }
         public void bancoInterbank()
         {
-            objetoCN.BorrarDat();
+            objetoCN.BorrarDat();            
             try
             {
                 string path1 = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\INTERBANK\{0}\{1}\{2}\22073390118{3}.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"), carpeta1.ToString("MMdd"));
@@ -407,66 +414,69 @@ namespace Capa_Presentacion
                         {
                             case 'S':
                                 cabecera++;
-                                if (cabecera == 2)
+                                try
                                 {
+                                    cabecera = 2;
                                     lineas = Convert.ToInt32(linea1.Substring(31, 8));
                                     monto = Convert.ToDouble(linea1.Substring(42, 12));
                                 }
+                                catch
+                                { }
                                 break;
-
                             default:
                                 contador++;
 
                                 break;
                         }
-                    }
-                }
-                try
-                {
-                    string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\INTERBANK\{0}\{1}\{2}\21073390118{3}.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"), carpeta1.ToString("MMdd"));
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        while (sr.Peek() >= 0)
-                        {
-                            string linea = sr.ReadLine();
-                            char tipo = Convert.ToChar(linea.Substring(1, 1));
-                            string datos = linea.Substring(1);
-                            switch (tipo)
-                            {
-                                case '7':
-
-                                    detalle++;
-                                    fecha_cabecera = Convert.ToString(linea.Substring(82, 8));
-                                    abonado = Convert.ToString(linea.Substring(9, 6));
-                                    fecha = Convert.ToString(linea.Substring(82, 8));
-                                    limite = Convert.ToString(linea.Substring(29, 8));
-                                    dinero = Convert.ToString(linea.Substring(101, 8));
-
-                                    objetoCN.insertarDat(abonado, fecha, limite, dinero);
-
-                                    break;
-
-                                default:
-                                    contador++;
-                                    break;
-                            }
-                        }
-                    }
-                }
-                catch
-                {
-                    Lbl_Error_archivo.Text = string.Format("Nombre del Archivo no coincise debe abrir 21073390118{0}", carpeta.ToString("MMdd"));
-                    LimpiarLbl();
-                }
-
-                Lbl_Total.Text = lineas.ToString();
-                Lbl_Monto_Consolidado.Text = monto.ToString();               
+                    }                   
+                }                
             }
+            
             catch
             {
                 Lbl_Error_archivo.Text = string.Format("Nombre del Archivo no coincise debe abrir 22073390118{0}", carpeta.ToString("MMdd"));
                 LimpiarLbl();
+            }            
+            try
+            {
+                string path = string.Format(@"\\192.168.101.36\Documentos - Sistemas\Progs\INTERBANK\{0}\{1}\{2}\21073390118{3}.txt", carpeta.ToString("yyyy"), carpeta.ToString("MM"), carpeta.ToString("dd"), carpeta1.ToString("MMdd"));
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    while (sr.Peek() >= 0)
+                    {
+                        string linea = sr.ReadLine();
+                        char tipo = Convert.ToChar(linea.Substring(1, 1));                        
+                        switch (tipo)
+                        {
+                            case '7':
+
+                                detalle++;
+                                fecha_cabecera = Convert.ToString(linea.Substring(82, 8));
+                                abonado = Convert.ToString(linea.Substring(9, 6));
+                                fecha = Convert.ToString(linea.Substring(82, 8));
+                                limite = Convert.ToString(linea.Substring(29, 8));
+                                dinero = Convert.ToString(linea.Substring(101, 8));
+
+                                objetoCN.insertarDat(abonado, fecha, limite, dinero);
+
+                                break;
+
+                            default:
+                                contador++;
+                                break;
+                        }
+                    }
+                }
             }
+            catch
+            {
+                Lbl_Error_archivo.Text = string.Format("Nombre del Archivo no coincise debe abrir 21073390118{0}", carpeta.ToString("MMdd"));
+                LimpiarLbl();
+            }
+
+            Lbl_Total.Text = lineas.ToString();
+            Lbl_Monto_Consolidado.Text = monto.ToString();
+
             objetoCN.EditarTodoCampoFecha();
             objetoCN.CeroInterbank();
 
@@ -508,37 +518,51 @@ namespace Capa_Presentacion
             var TotalDeDatos = contaraqp + contartacna;
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
-       
+
         private void BtnBbva_Click(object sender, EventArgs e)
         {
+            LimpiarLbl();
             bancoBbva();            
         }
         private void BtnBcp_Click(object sender, EventArgs e)
         {
+            LimpiarLbl();
             bancoBcp();           
         }
         private void BtnInterbank_Click(object sender, EventArgs e)
         {
+            LimpiarLbl();
             bancoInterbank();        
         }
         private void BtnScotiabank_Click(object sender, EventArgs e)
         {
+            LimpiarLbl();
             bancoScotiabank();
-        }
-
-        private void btn_ejeee_Click(object sender, EventArgs e)
-        {
-            bancoScotiabank();
-        }
+        }        
 
         public void LimpiarLbl()
         {
             Lbl_Total.Text = "";
+            Lbl_Monto_Consolidado.Text = "";
+            Lbl_Monto_Sapiens.Text = "";
+            Lbl_Diferencia_Dinero.Text = "";
+            Lbl_Total_Aqp.Text = "";
+            Lbl_Total_Tacna.Text = "";
+            Lbl_Total_De_Datos.Text = "";
+            Lbl_Total_Error.Text = "";
         }
 
         private void siguiente_Click(object sender, EventArgs e)
         {
             FromSeleccionarDIa frm = new FromSeleccionarDIa();
+            this.Hide();
+            frm.ShowDialog();
+            this.Close();
+        }
+
+        private void Btn_Refres_Click(object sender, EventArgs e)
+        {
+            FormBancos frm = new FormBancos();
             this.Hide();
             frm.ShowDialog();
             this.Close();

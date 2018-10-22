@@ -49,15 +49,16 @@
             this.Lbl_Total_Tacna = new System.Windows.Forms.Label();
             this.Lbl_Error_archivo = new System.Windows.Forms.Label();
             this.Lbl_Total_Error = new System.Windows.Forms.Label();
-            this.btn_ejeee = new System.Windows.Forms.Button();
             this.Lbl_Monto_Sapiens = new System.Windows.Forms.Label();
             this.Lbl_Diferencia_Dinero = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Lbl_Total_De_Datos = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.Btn_Refres = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.siguiente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Btn_Refres)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -304,24 +305,6 @@
             this.Lbl_Total_Error.Size = new System.Drawing.Size(0, 15);
             this.Lbl_Total_Error.TabIndex = 26;
             // 
-            // btn_ejeee
-            // 
-            this.btn_ejeee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ejeee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
-            this.btn_ejeee.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_ejeee.FlatAppearance.BorderSize = 0;
-            this.btn_ejeee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.btn_ejeee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_ejeee.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ejeee.ForeColor = System.Drawing.Color.White;
-            this.btn_ejeee.Location = new System.Drawing.Point(358, 222);
-            this.btn_ejeee.Name = "btn_ejeee";
-            this.btn_ejeee.Size = new System.Drawing.Size(177, 26);
-            this.btn_ejeee.TabIndex = 27;
-            this.btn_ejeee.Text = "eje";
-            this.btn_ejeee.UseVisualStyleBackColor = false;
-            this.btn_ejeee.Click += new System.EventHandler(this.btn_ejeee_Click);
-            // 
             // Lbl_Monto_Sapiens
             // 
             this.Lbl_Monto_Sapiens.AutoSize = true;
@@ -374,18 +357,31 @@
             this.label4.TabIndex = 31;
             this.label4.Text = "Total de Datos:";
             // 
+            // Btn_Refres
+            // 
+            this.Btn_Refres.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Refres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_Refres.Image = ((System.Drawing.Image)(resources.GetObject("Btn_Refres.Image")));
+            this.Btn_Refres.Location = new System.Drawing.Point(15, 360);
+            this.Btn_Refres.Name = "Btn_Refres";
+            this.Btn_Refres.Size = new System.Drawing.Size(30, 30);
+            this.Btn_Refres.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Btn_Refres.TabIndex = 33;
+            this.Btn_Refres.TabStop = false;
+            this.Btn_Refres.Click += new System.EventHandler(this.Btn_Refres_Click);
+            // 
             // FormBancos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(562, 402);
+            this.Controls.Add(this.Btn_Refres);
             this.Controls.Add(this.Lbl_Total_De_Datos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Lbl_Diferencia_Dinero);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Lbl_Monto_Sapiens);
-            this.Controls.Add(this.btn_ejeee);
             this.Controls.Add(this.Lbl_Total_Error);
             this.Controls.Add(this.Lbl_Error_archivo);
             this.Controls.Add(this.Lbl_Total_Tacna);
@@ -413,6 +409,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.siguiente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Btn_Refres)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,12 +437,12 @@
         private System.Windows.Forms.Label Lbl_Total_Tacna;
         private System.Windows.Forms.Label Lbl_Error_archivo;
         private System.Windows.Forms.Label Lbl_Total_Error;
-        private System.Windows.Forms.Button btn_ejeee;
         private System.Windows.Forms.Label Lbl_Monto_Sapiens;
         private System.Windows.Forms.Label Lbl_Diferencia_Dinero;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Lbl_Total_De_Datos;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox Btn_Refres;
     }
 }
 

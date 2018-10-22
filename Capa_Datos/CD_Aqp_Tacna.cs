@@ -11,13 +11,14 @@ namespace Capa_Datos
         SqlDataReader leer;
         DataTable tabla = new DataTable();
         SqlCommand comando = new SqlCommand();
-        string fecha = "DECLARE @inicio DATE,@final DATE set @inicio=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY((GETDATE())-getdate()))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))set @final=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))";
+        string fecha = "DECLARE @inicio varchar(10),@final varchar(10)set @inicio=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY((GETDATE())-getdate()))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))set @final=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))";
 
         public void EjecutarBbva()
         {
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "SP_VALIDA_CARGOS_BBVASOL";
             comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandTimeout = 220;
 
             comando.ExecuteNonQuery();
 
@@ -28,6 +29,7 @@ namespace Capa_Datos
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "SP_VALIDA_CARGOS_BCPSOL";
             comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandTimeout = 220;
 
             comando.ExecuteNonQuery();
 
@@ -38,6 +40,7 @@ namespace Capa_Datos
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "SP_VALIDA_CARGOS_INTSOL";
             comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandTimeout = 220;
 
             comando.ExecuteNonQuery();
 
@@ -48,6 +51,7 @@ namespace Capa_Datos
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "SP_VALIDA_CARGOS_SCOSOL";
             comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandTimeout = 220;
 
             comando.ExecuteNonQuery();
 
@@ -68,6 +72,7 @@ namespace Capa_Datos
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "sp_cas";
             comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandTimeout = 200;
 
             comando.ExecuteNonQuery();
 
@@ -137,8 +142,21 @@ namespace Capa_Datos
         public void CobranzaAqp()
         {
             comando.Connection = conexionT.AbrirConexionT();
-            comando.CommandText = "exec SP_ATUALIZA_CONTABILIDADE '"+fecha+"', '09/20/2018' ,'7'";
-            comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandText = fecha + "exec SP_ATUALIZA_CONTABILIDADE @inicio,@final,'7'";
+            comando.CommandType = CommandType.Text;
+            comando.CommandTimeout = 220;
+
+            comando.ExecuteNonQuery();
+
+            comando.Parameters.Clear();
+        }
+
+        public void CobranzaTacna()
+        {
+            comando.Connection = conexionT.AbrirConexionT();
+            comando.CommandText = fecha + "exec SP_ATUALIZA_CONTABILIDADE @inicio,@final,'8'";
+            comando.CommandType = CommandType.Text;
+            comando.CommandTimeout = 220;
 
             comando.ExecuteNonQuery();
 
@@ -148,8 +166,19 @@ namespace Capa_Datos
         public DataTable FechaCobranza()
         {
             comando.Connection = conexionA.AbrirConexionA();
-            comando.CommandText = fecha+ "select convert(varchar,@final,103)";
+            comando.CommandText = fecha + "select @final";
             comando.CommandType = CommandType.Text;
+            leer = comando.ExecuteReader();
+            tabla.Load(leer);
+            conexionA.CerrarConexionA();
+            return tabla;
+        }
+
+        public DataTable Dolares()
+        {
+            comando.Connection = conexionA.AbrirConexionA();
+            comando.CommandText = "SELECT * FROM TMP_ENVIO_BBVA_SOL ORDER BY CABECERA";
+            comando.CommandType = CommandType.Text;            
             leer = comando.ExecuteReader();
             tabla.Load(leer);
             conexionA.CerrarConexionA();
