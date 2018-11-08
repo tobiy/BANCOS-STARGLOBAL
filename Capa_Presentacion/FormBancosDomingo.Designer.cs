@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBancosDomingo));
             this.Lbl_Total_De_Datos = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.Lbl_Diferencia_Dinero = new System.Windows.Forms.Label();
@@ -49,74 +48,71 @@
             this.BtnScotiabank = new System.Windows.Forms.Button();
             this.BtnInterbank = new System.Windows.Forms.Button();
             this.BtnBbva = new System.Windows.Forms.Button();
-            this.siguiente = new System.Windows.Forms.PictureBox();
-            this.BtnCerrar = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.siguiente)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnCerrar)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // Lbl_Total_De_Datos
             // 
             this.Lbl_Total_De_Datos.AutoSize = true;
-            this.Lbl_Total_De_Datos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Total_De_Datos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Total_De_Datos.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Total_De_Datos.Location = new System.Drawing.Point(167, 250);
+            this.Lbl_Total_De_Datos.Location = new System.Drawing.Point(211, 353);
             this.Lbl_Total_De_Datos.Name = "Lbl_Total_De_Datos";
-            this.Lbl_Total_De_Datos.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Total_De_Datos.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Total_De_Datos.TabIndex = 57;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(41, 250);
+            this.label4.Location = new System.Drawing.Point(59, 353);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 15);
+            this.label4.Size = new System.Drawing.Size(132, 20);
             this.label4.TabIndex = 56;
             this.label4.Text = "Total de Datos:";
             // 
             // Lbl_Diferencia_Dinero
             // 
             this.Lbl_Diferencia_Dinero.AutoSize = true;
-            this.Lbl_Diferencia_Dinero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Diferencia_Dinero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Diferencia_Dinero.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Diferencia_Dinero.Location = new System.Drawing.Point(167, 160);
+            this.Lbl_Diferencia_Dinero.Location = new System.Drawing.Point(211, 256);
             this.Lbl_Diferencia_Dinero.Name = "Lbl_Diferencia_Dinero";
-            this.Lbl_Diferencia_Dinero.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Diferencia_Dinero.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Diferencia_Dinero.TabIndex = 55;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.DarkGray;
-            this.label3.Location = new System.Drawing.Point(6, 160);
+            this.label3.Location = new System.Drawing.Point(10, 256);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(144, 15);
+            this.label3.Size = new System.Drawing.Size(179, 20);
             this.label3.TabIndex = 54;
             this.label3.Text = "Diferencia de Dinero:";
             // 
             // Lbl_Monto_Sapiens
             // 
             this.Lbl_Monto_Sapiens.AutoSize = true;
-            this.Lbl_Monto_Sapiens.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Monto_Sapiens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Monto_Sapiens.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Monto_Sapiens.Location = new System.Drawing.Point(167, 127);
+            this.Lbl_Monto_Sapiens.Location = new System.Drawing.Point(211, 223);
             this.Lbl_Monto_Sapiens.Name = "Lbl_Monto_Sapiens";
-            this.Lbl_Monto_Sapiens.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Monto_Sapiens.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Monto_Sapiens.TabIndex = 53;
             // 
             // Lbl_Total_Error
             // 
             this.Lbl_Total_Error.AutoSize = true;
-            this.Lbl_Total_Error.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Total_Error.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Total_Error.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Total_Error.Location = new System.Drawing.Point(164, 279);
+            this.Lbl_Total_Error.Location = new System.Drawing.Point(211, 384);
             this.Lbl_Total_Error.Name = "Lbl_Total_Error";
-            this.Lbl_Total_Error.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Total_Error.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Total_Error.TabIndex = 51;
             // 
             // Lbl_Error_archivo
@@ -132,106 +128,106 @@
             // Lbl_Total_Tacna
             // 
             this.Lbl_Total_Tacna.AutoSize = true;
-            this.Lbl_Total_Tacna.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Total_Tacna.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Total_Tacna.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Total_Tacna.Location = new System.Drawing.Point(167, 224);
+            this.Lbl_Total_Tacna.Location = new System.Drawing.Point(211, 320);
             this.Lbl_Total_Tacna.Name = "Lbl_Total_Tacna";
-            this.Lbl_Total_Tacna.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Total_Tacna.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Total_Tacna.TabIndex = 49;
             // 
             // Lbl_Monto_Consolidado
             // 
             this.Lbl_Monto_Consolidado.AutoSize = true;
-            this.Lbl_Monto_Consolidado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Monto_Consolidado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Monto_Consolidado.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Monto_Consolidado.Location = new System.Drawing.Point(167, 95);
+            this.Lbl_Monto_Consolidado.Location = new System.Drawing.Point(211, 191);
             this.Lbl_Monto_Consolidado.Name = "Lbl_Monto_Consolidado";
-            this.Lbl_Monto_Consolidado.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Monto_Consolidado.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Monto_Consolidado.TabIndex = 48;
             // 
             // Lbl_Total_Aqp
             // 
             this.Lbl_Total_Aqp.AutoSize = true;
-            this.Lbl_Total_Aqp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Total_Aqp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Total_Aqp.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Total_Aqp.Location = new System.Drawing.Point(167, 192);
+            this.Lbl_Total_Aqp.Location = new System.Drawing.Point(211, 288);
             this.Lbl_Total_Aqp.Name = "Lbl_Total_Aqp";
-            this.Lbl_Total_Aqp.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Total_Aqp.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Total_Aqp.TabIndex = 47;
             // 
             // Lbl_Total
             // 
             this.Lbl_Total.AutoSize = true;
-            this.Lbl_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Total.ForeColor = System.Drawing.Color.White;
-            this.Lbl_Total.Location = new System.Drawing.Point(167, 64);
+            this.Lbl_Total.Location = new System.Drawing.Point(211, 160);
             this.Lbl_Total.Name = "Lbl_Total";
-            this.Lbl_Total.Size = new System.Drawing.Size(0, 15);
+            this.Lbl_Total.Size = new System.Drawing.Size(0, 20);
             this.Lbl_Total.TabIndex = 46;
             // 
             // Lbl_Cantidad_Errores
             // 
             this.Lbl_Cantidad_Errores.AutoSize = true;
-            this.Lbl_Cantidad_Errores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Cantidad_Errores.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Cantidad_Errores.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Cantidad_Errores.Location = new System.Drawing.Point(6, 279);
+            this.Lbl_Cantidad_Errores.Location = new System.Drawing.Point(15, 384);
             this.Lbl_Cantidad_Errores.Name = "Lbl_Cantidad_Errores";
-            this.Lbl_Cantidad_Errores.Size = new System.Drawing.Size(139, 15);
+            this.Lbl_Cantidad_Errores.Size = new System.Drawing.Size(175, 20);
             this.Lbl_Cantidad_Errores.TabIndex = 45;
             this.Lbl_Cantidad_Errores.Text = "Cantidad de Errores:";
             // 
             // Lbl_Sapiens
             // 
             this.Lbl_Sapiens.AutoSize = true;
-            this.Lbl_Sapiens.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Sapiens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Sapiens.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Sapiens.Location = new System.Drawing.Point(43, 127);
+            this.Lbl_Sapiens.Location = new System.Drawing.Point(55, 223);
             this.Lbl_Sapiens.Name = "Lbl_Sapiens";
-            this.Lbl_Sapiens.Size = new System.Drawing.Size(107, 15);
+            this.Lbl_Sapiens.Size = new System.Drawing.Size(134, 20);
             this.Lbl_Sapiens.TabIndex = 44;
             this.Lbl_Sapiens.Text = "Monto Sapiens:";
             // 
             // Lbl_Selec_Tacna
             // 
             this.Lbl_Selec_Tacna.AutoSize = true;
-            this.Lbl_Selec_Tacna.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Selec_Tacna.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Selec_Tacna.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Selec_Tacna.Location = new System.Drawing.Point(57, 224);
+            this.Lbl_Selec_Tacna.Location = new System.Drawing.Point(75, 320);
             this.Lbl_Selec_Tacna.Name = "Lbl_Selec_Tacna";
-            this.Lbl_Selec_Tacna.Size = new System.Drawing.Size(91, 15);
+            this.Lbl_Selec_Tacna.Size = new System.Drawing.Size(116, 20);
             this.Lbl_Selec_Tacna.TabIndex = 43;
             this.Lbl_Selec_Tacna.Text = "Datos Tacna:";
             // 
             // Lbl_Consolidado
             // 
             this.Lbl_Consolidado.AutoSize = true;
-            this.Lbl_Consolidado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Consolidado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Consolidado.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Consolidado.Location = new System.Drawing.Point(15, 95);
+            this.Lbl_Consolidado.Location = new System.Drawing.Point(21, 191);
             this.Lbl_Consolidado.Name = "Lbl_Consolidado";
-            this.Lbl_Consolidado.Size = new System.Drawing.Size(135, 15);
+            this.Lbl_Consolidado.Size = new System.Drawing.Size(168, 20);
             this.Lbl_Consolidado.TabIndex = 42;
             this.Lbl_Consolidado.Text = "Monto Consolidado:";
             // 
             // Lbl_Select_Aqp
             // 
             this.Lbl_Select_Aqp.AutoSize = true;
-            this.Lbl_Select_Aqp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Select_Aqp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Select_Aqp.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Select_Aqp.Location = new System.Drawing.Point(41, 192);
+            this.Lbl_Select_Aqp.Location = new System.Drawing.Point(52, 288);
             this.Lbl_Select_Aqp.Name = "Lbl_Select_Aqp";
-            this.Lbl_Select_Aqp.Size = new System.Drawing.Size(109, 15);
+            this.Lbl_Select_Aqp.Size = new System.Drawing.Size(139, 20);
             this.Lbl_Select_Aqp.TabIndex = 41;
             this.Lbl_Select_Aqp.Text = "Datos Arequipa:";
             // 
             // Lbl_Cantidad
             // 
             this.Lbl_Cantidad.AutoSize = true;
-            this.Lbl_Cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.Lbl_Cantidad.ForeColor = System.Drawing.Color.DarkGray;
-            this.Lbl_Cantidad.Location = new System.Drawing.Point(23, 64);
+            this.Lbl_Cantidad.Location = new System.Drawing.Point(29, 160);
             this.Lbl_Cantidad.Name = "Lbl_Cantidad";
-            this.Lbl_Cantidad.Size = new System.Drawing.Size(127, 15);
+            this.Lbl_Cantidad.Size = new System.Drawing.Size(161, 20);
             this.Lbl_Cantidad.TabIndex = 40;
             this.Lbl_Cantidad.Text = "Cantidad de datos:";
             // 
@@ -243,14 +239,15 @@
             this.BtnScotiabank.FlatAppearance.BorderSize = 0;
             this.BtnScotiabank.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
             this.BtnScotiabank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnScotiabank.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnScotiabank.Font = new System.Drawing.Font("Impact", 20.25F);
             this.BtnScotiabank.ForeColor = System.Drawing.Color.White;
-            this.BtnScotiabank.Location = new System.Drawing.Point(351, 192);
+            this.BtnScotiabank.Location = new System.Drawing.Point(846, 191);
             this.BtnScotiabank.Name = "BtnScotiabank";
-            this.BtnScotiabank.Size = new System.Drawing.Size(177, 26);
+            this.BtnScotiabank.Size = new System.Drawing.Size(177, 52);
             this.BtnScotiabank.TabIndex = 39;
             this.BtnScotiabank.Text = "SCOTIABANK";
             this.BtnScotiabank.UseVisualStyleBackColor = false;
+            this.BtnScotiabank.Click += new System.EventHandler(this.BtnScotiabank_Click);
             // 
             // BtnInterbank
             // 
@@ -260,14 +257,15 @@
             this.BtnInterbank.FlatAppearance.BorderSize = 0;
             this.BtnInterbank.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
             this.BtnInterbank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnInterbank.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnInterbank.Font = new System.Drawing.Font("Impact", 20.25F);
             this.BtnInterbank.ForeColor = System.Drawing.Color.White;
-            this.BtnInterbank.Location = new System.Drawing.Point(351, 160);
+            this.BtnInterbank.Location = new System.Drawing.Point(846, 323);
             this.BtnInterbank.Name = "BtnInterbank";
-            this.BtnInterbank.Size = new System.Drawing.Size(177, 26);
+            this.BtnInterbank.Size = new System.Drawing.Size(177, 52);
             this.BtnInterbank.TabIndex = 38;
             this.BtnInterbank.Text = "INTERBANK";
             this.BtnInterbank.UseVisualStyleBackColor = false;
+            this.BtnInterbank.Click += new System.EventHandler(this.BtnInterbank_Click);
             // 
             // BtnBbva
             // 
@@ -277,56 +275,44 @@
             this.BtnBbva.FlatAppearance.BorderSize = 0;
             this.BtnBbva.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
             this.BtnBbva.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBbva.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBbva.Font = new System.Drawing.Font("Impact", 20.25F);
             this.BtnBbva.ForeColor = System.Drawing.Color.White;
-            this.BtnBbva.Location = new System.Drawing.Point(351, 128);
+            this.BtnBbva.Location = new System.Drawing.Point(846, 256);
             this.BtnBbva.Name = "BtnBbva";
-            this.BtnBbva.Size = new System.Drawing.Size(177, 26);
+            this.BtnBbva.Size = new System.Drawing.Size(177, 52);
             this.BtnBbva.TabIndex = 36;
             this.BtnBbva.Text = "BBVA";
             this.BtnBbva.UseVisualStyleBackColor = false;
-            // 
-            // siguiente
-            // 
-            this.siguiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.siguiente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.siguiente.Image = ((System.Drawing.Image)(resources.GetObject("siguiente.Image")));
-            this.siguiente.Location = new System.Drawing.Point(527, 362);
-            this.siguiente.Name = "siguiente";
-            this.siguiente.Size = new System.Drawing.Size(30, 30);
-            this.siguiente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.siguiente.TabIndex = 35;
-            this.siguiente.TabStop = false;
-            this.siguiente.Click += new System.EventHandler(this.siguiente_Click);
-            // 
-            // BtnCerrar
-            // 
-            this.BtnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("BtnCerrar.Image")));
-            this.BtnCerrar.Location = new System.Drawing.Point(527, 10);
-            this.BtnCerrar.Name = "BtnCerrar";
-            this.BtnCerrar.Size = new System.Drawing.Size(30, 30);
-            this.BtnCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BtnCerrar.TabIndex = 34;
-            this.BtnCerrar.TabStop = false;
-            this.BtnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click_1);
+            this.BtnBbva.Click += new System.EventHandler(this.BtnBbva_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 10);
+            this.dataGridView1.Location = new System.Drawing.Point(489, 30);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(10, 10);
             this.dataGridView1.TabIndex = 33;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(383, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(367, 39);
+            this.label1.TabIndex = 58;
+            this.label1.Text = "Proceso del Domingo";
             // 
             // FormBancosDomingo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
-            this.ClientSize = new System.Drawing.Size(562, 402);
+            this.ClientSize = new System.Drawing.Size(1080, 615);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_Total_De_Datos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Lbl_Diferencia_Dinero);
@@ -347,15 +333,11 @@
             this.Controls.Add(this.BtnScotiabank);
             this.Controls.Add(this.BtnInterbank);
             this.Controls.Add(this.BtnBbva);
-            this.Controls.Add(this.siguiente);
-            this.Controls.Add(this.BtnCerrar);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBancosDomingo";
             this.Text = "FormBancosDomingo";
             this.Load += new System.EventHandler(this.FormBancosDomingo_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.siguiente)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -384,8 +366,7 @@
         private System.Windows.Forms.Button BtnScotiabank;
         private System.Windows.Forms.Button BtnInterbank;
         private System.Windows.Forms.Button BtnBbva;
-        private System.Windows.Forms.PictureBox siguiente;
-        private System.Windows.Forms.PictureBox BtnCerrar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
     }
 }

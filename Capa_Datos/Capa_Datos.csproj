@@ -44,7 +44,6 @@
     <Compile Include="CD_Aqp_Tacna.cs" />
     <Compile Include="CD_Conexion.cs" />
     <Compile Include="CD_Bancos.cs" />
-    <Compile Include="CD_Copia_De_Tablas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

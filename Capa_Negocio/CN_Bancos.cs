@@ -13,6 +13,7 @@ namespace Capa_Negocio
     {
         private CD_Bancos objetoCD = new CD_Bancos();
 
+        //llamar a todas las funciones de la capa de datos 
         public void EditarTodoCampoFecha() 
         {
             objetoCD.EditarTodasFechas();
@@ -41,6 +42,7 @@ namespace Capa_Negocio
         {
             objetoCD.CerosScotiabank();
         }
+        //llenar el datagridview para poder extraer los datos  y mostrarlos en un label
         
         public DataTable BorrarDat()
         {
@@ -99,6 +101,30 @@ namespace Capa_Negocio
         public void insertarDat(string abonado, string fecha, string limite, string dinero)
         {
             objetoCD.InsertarData(abonado,fecha,limite,dinero);           
-        }        
+        }
+        public DataTable DatoSapiensBbva()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.DatoSapiensBbva();
+            return tabla;
+        }
+        public DataTable DatoSapiensBcp()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.DatoSapiensBcp();
+            return tabla;
+        }
+        public DataTable DatoSapiensInterbank()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.DatoSapiensInterbank();
+            return tabla;
+        }
+        public DataTable DatoSapiensScotiabank()
+        {
+            DataTable tabla = new DataTable();
+            tabla = objetoCD.DatoSapiensScotiabank();
+            return tabla;
+        }
     }
 }

@@ -35,5 +35,20 @@ namespace Capa_Datos
                 ConexionT.Close();
             return ConexionT;
         }
+        //conexion para la base de datos 117 para poder guardar yt hacer la comparacion de los datos cuando se quiera hacer una comapracion
+        private SqlConnection Conexion117 = new SqlConnection("data source = 192.168.101.117; initial catalog = 06SapiensNet2AQP; user id = sapiensnet; password = sapiensnet");
+        public SqlConnection AbrirConexion117()
+        {
+            if (Conexion117.State == ConnectionState.Closed)
+                Conexion117.Open();
+            return Conexion117;
+        }
+
+        public SqlConnection CerrarConexion117()
+        {
+            if (Conexion117.State == ConnectionState.Open)
+                Conexion117.Close();
+            return Conexion117;
+        }
     }
 }

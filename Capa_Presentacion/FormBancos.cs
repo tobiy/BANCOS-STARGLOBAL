@@ -73,6 +73,11 @@ namespace Capa_Presentacion
             CN_Bancos objeto = new CN_Bancos();
             dataGridView1.DataSource = objeto.SumaBcp();
         }
+        private void SumaBcpLunes()
+        {
+            CN_Bancos objeto = new CN_Bancos();
+            dataGridView1.DataSource = objeto.SumaBcpLunes();
+        }
         private void SumaInterbank()
         {
             CN_Bancos objeto = new CN_Bancos();
@@ -94,12 +99,6 @@ namespace Capa_Presentacion
             CN_Aqp_Tacna objeto = new CN_Aqp_Tacna();
             dataGridView1.DataSource = objeto.EliminarDatosTacn();
         }
-
-        private void BtnCerrar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         //transformacion y llenado de datos delo banco bcp        
 
         public void bancoBbva()
@@ -153,6 +152,12 @@ namespace Capa_Presentacion
                 LimpiarLbl();
             }
             objetoCN.EditarTodoCampoFecha();
+
+            //borrar base de datos 
+            //poner codigo para poder crear base de datos para podercomparar en caso de error
+            
+            //objetos.ConsolidadoBbva();
+            //objetos.ComparacionBbva();
 
             objetoCN.CeroBbva();
 
@@ -257,6 +262,8 @@ namespace Capa_Presentacion
             {
                 objetoCN.EditarTodoCampoFecha();
             }
+            //objetos.ConsolidadoBcp();
+            //objetos.ComparacionBcp();
 
             //darle formato de insert a la tabla tmp_bcpr
             objetoCN.CeroBcp();
@@ -288,7 +295,14 @@ namespace Capa_Presentacion
             var contarerror1 = Convert.ToInt32(contarerror);
             Lbl_Total_Error.Text = contarerror1.ToString();
 
-            SumaBcp();
+            if (carpeta.ToString("dddd") == dia)
+            {
+                SumaBcpLunes();
+            }
+            else
+            {
+                SumaBcp();
+            }            
             var contarBcp = this.dataGridView1.CurrentCell.Value.ToString();
             var contarBcp1 = Convert.ToDouble(contarBcp);
             Lbl_Monto_Sapiens.Text = contarBcp1.ToString();
@@ -357,6 +371,10 @@ namespace Capa_Presentacion
                 LimpiarLbl();
             }
             objetoCN.EditarTodoCampoFecha();
+
+            objetos.ConsolidadoScotiabank();
+            objetos.ComparacionScotiabank();
+
             objetoCN.CeroScotiabank();
 
             objetos.EjecutarScotiaban();
@@ -397,6 +415,8 @@ namespace Capa_Presentacion
             var TotalDeDatos = contaraqp + contartacna;
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
+
+        //transformacion de datos y llenado en la base de datos
         public void bancoInterbank()
         {
             objetoCN.BorrarDat();            
@@ -478,6 +498,10 @@ namespace Capa_Presentacion
             Lbl_Monto_Consolidado.Text = monto.ToString();
 
             objetoCN.EditarTodoCampoFecha();
+
+            //objetos.ConsolidadoInterbank();
+            //objetos.ComparacionInterbank();
+
             objetoCN.CeroInterbank();
 
             objetos.EjecutarInterban();
@@ -519,27 +543,38 @@ namespace Capa_Presentacion
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
 
+        //secciones de botones para el funcionaiento del sistema
+
         private void BtnBbva_Click(object sender, EventArgs e)
         {
             LimpiarLbl();
+            //objetos.BorrarBbva();
+            //objetos.BorrarRegistroBbva();
             bancoBbva();            
         }
         private void BtnBcp_Click(object sender, EventArgs e)
         {
             LimpiarLbl();
+            //objetos.BorrarBcp();
+            //objetos.BorrarRegistroBcp();            
             bancoBcp();           
         }
         private void BtnInterbank_Click(object sender, EventArgs e)
         {
             LimpiarLbl();
+            //objetos.BorrarInterbank();
+            //objetos.BorrarRegistroInterbank();            
             bancoInterbank();        
         }
         private void BtnScotiabank_Click(object sender, EventArgs e)
         {
             LimpiarLbl();
+            //objetos.BorrarScotiabank();
+            //objetos.BorrarRegistroScotiabank();            
             bancoScotiabank();
         }        
 
+        //funcion para limpiar los datos de los label del sistema
         public void LimpiarLbl()
         {
             Lbl_Total.Text = "";
@@ -550,22 +585,6 @@ namespace Capa_Presentacion
             Lbl_Total_Tacna.Text = "";
             Lbl_Total_De_Datos.Text = "";
             Lbl_Total_Error.Text = "";
-        }
-
-        private void siguiente_Click(object sender, EventArgs e)
-        {
-            FromSeleccionarDIa frm = new FromSeleccionarDIa();
-            this.Hide();
-            frm.ShowDialog();
-            this.Close();
-        }
-
-        private void Btn_Refres_Click(object sender, EventArgs e)
-        {
-            FormBancos frm = new FormBancos();
-            this.Hide();
-            frm.ShowDialog();
-            this.Close();
         }
     }
 }

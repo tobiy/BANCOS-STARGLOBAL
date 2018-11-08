@@ -11,12 +11,14 @@ namespace Capa_Presentacion
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
+        /// 
+        //llamado de la ventana principal para poder visualizar el arranque del sistema
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FromSeleccionarDIa());
+            Application.Run(new ContenedorPrincipal());
         }
     }
 }

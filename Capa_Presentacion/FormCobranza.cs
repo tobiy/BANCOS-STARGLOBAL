@@ -9,24 +9,64 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Negocio;
 using System.IO;
+using Microsoft.Office.Interop;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace Capa_Presentacion
 {
-    public partial class Lbl_Monto_Consolidado : Form
+    public partial class FormCobranza : Form
     {
         CN_Aqp_Tacna objetos = new CN_Aqp_Tacna();
-    
-           
-        public Lbl_Monto_Consolidado()
+        CN_Bancos objetoCN = new CN_Bancos();
+
+
+        public FormCobranza()
         {
             InitializeComponent();
         }
 
         private void BtnBbva_Click(object sender, EventArgs e)
         {
+            //~~> Define your Excel Objects
+            Excel.Application xlApp = new Excel.Application();
 
+            Excel.Workbook xlWorkBook;
+
+            //~~> Start Excel and open the workbook.
+            xlWorkBook = xlApp.Workbooks.Open(@"C:\Users\arni_\OneDrive\Documentos\trabajo para hacer  star global\prueba\output.xlsx");
+
+            //~~> Run the macros by supplying the necessary arguments
+            xlApp.Run("COMPARACION", "Hello from C# Client", "Demo to run Excel macros from C#");
+
+            //~~> Clean-up: Close the workbook
+            xlWorkBook.Close(false);
+
+            //~~> Quit the Excel Application
+            xlApp.Quit();
+
+            //~~> Clean Up
+            releaseObject(xlApp);
+            releaseObject(xlWorkBook);
+            //objetos.CobranzaTacna();
         }
 
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
         private void Desconectados_Load(object sender, EventArgs e)
         {
 
@@ -50,6 +90,7 @@ namespace Capa_Presentacion
             //Nota: La propiedad To es una colección que permite enviar el mensaje a más de un destinatario
 
             cobranza();
+
             var cobranzaqp = this.dataGridCargarBancos.CurrentCell.Value.ToString();
             var totalcobranza = Convert.ToString(cobranzaqp);
             //Asunto
@@ -100,29 +141,28 @@ namespace Capa_Presentacion
 
         private void BtnCargarAqpTacna_Click(object sender, EventArgs e)
         {
-            objetos.CobranzaAqp();
+            //objetos.CobranzaAqp();
             objetos.CobranzaTacna();
-            EnviarCorreo();
+            //EnviarCorreo();
             
-        }
-        private void Dolares()
-        {
-            CN_Aqp_Tacna objeto = new CN_Aqp_Tacna();
-            dataGridDesconectadosAqp.DataSource = objeto.Dolar();
-        }
+        }      
 
         private void BtnDesconectadosAqp_Click(object sender, EventArgs e)
         {
-            //froma de como generar txt para subida de bancos
-
-            //Dolares();
-            //TextWriter sw = new StreamWriter(@"C:\Users\arni_\OneDrive\Documentos\trabajo para hacer  star global\prueba\bbva11.txt");
-            //int rowcount = dataGridDesconectadosAqp.Rows.Count;
-            //for (int i = 0; i < rowcount - 1; i++)
-            //{
-            //    sw.WriteLine(dataGridDesconectadosAqp.Rows[i].Cells[0].Value.ToString());
-            //}
-            //sw.Close();     //Don't Forget Close the TextWriter Object(sw)
+            objetos.CobranzaAqp();            
         }
+
+        //froma de como generar txt para subida de bancos
+
+
+        //TextWriter sw = new StreamWriter(@"C:\Users\arni_\OneDrive\Documentos\trabajo para hacer  star global\prueba\bbva11.txt");
+        //int rowcount = dataGridDesconectadosAqp.Rows.Count;
+        //for (int i = 0; i < rowcount - 1; i++)
+        //{
+        //    sw.WriteLine(dataGridDesconectadosAqp.Rows[i].Cells[0].Value.ToString());
+        //}
+        //sw.Close();     //Don't Forget Close the TextWriter Object(sw)
+
     }
+
 }

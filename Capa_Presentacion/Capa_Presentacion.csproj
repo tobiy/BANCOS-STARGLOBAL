@@ -33,6 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.4.9.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpreadsheetLight.3.4.9\lib\SpreadsheetLight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,17 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContenedorPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContenedorPrincipal.designer.cs">
+      <DependentUpon>ContenedorPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBancosDomingo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBancosDomingo.Designer.cs">
       <DependentUpon>FormBancosDomingo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDesconectados.cs">
+    <Compile Include="FormCobranza.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDesconectados.Designer.cs">
-      <DependentUpon>FormDesconectados.cs</DependentUpon>
+    <Compile Include="FormCobranza.Designer.cs">
+      <DependentUpon>FormCobranza.cs</DependentUpon>
     </Compile>
     <Compile Include="FormBancos.cs">
       <SubType>Form</SubType>
@@ -64,25 +77,28 @@
     <Compile Include="FormBancos.Designer.cs">
       <DependentUpon>FormBancos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FromSeleccionarDIa.cs">
+    <Compile Include="FormTransformador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FromSeleccionarDIa.Designer.cs">
-      <DependentUpon>FromSeleccionarDIa.cs</DependentUpon>
+    <Compile Include="FormTransformador.Designer.cs">
+      <DependentUpon>FormTransformador.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ContenedorPrincipal.resx">
+      <DependentUpon>ContenedorPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBancosDomingo.resx">
       <DependentUpon>FormBancosDomingo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDesconectados.resx">
-      <DependentUpon>FormDesconectados.cs</DependentUpon>
+    <EmbeddedResource Include="FormCobranza.resx">
+      <DependentUpon>FormCobranza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBancos.resx">
       <DependentUpon>FormBancos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromSeleccionarDIa.resx">
-      <DependentUpon>FromSeleccionarDIa.cs</DependentUpon>
+    <EmbeddedResource Include="FormTransformador.resx">
+      <DependentUpon>FormTransformador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,6 +109,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

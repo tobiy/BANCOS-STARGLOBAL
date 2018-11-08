@@ -26,8 +26,8 @@ namespace Capa_Presentacion
 
         //creacion de variables para dar formato a la fecha 
 
-        DateTime carpeta = DateTime.Today.AddDays(0);
-        DateTime carpeta1 = DateTime.Today.AddDays(-1);        
+        DateTime carpeta = DateTime.Today.AddDays(-1);
+        DateTime carpeta1 = DateTime.Today.AddDays(-2);        
 
         public FormBancosDomingo()
         {
@@ -57,7 +57,7 @@ namespace Capa_Presentacion
             CN_Aqp_Tacna objeto = new CN_Aqp_Tacna();
             dataGridView1.DataSource = objeto.EliminarDatosAq();
         }
-        //calses creadas para poder la cantidad de pagos que se realizan en cada uno de los bancos
+        //inicializacion de consulatas para poder aptar el mensaje qdel datagridview
         private void SumaBbvaDomingo()
         {
             CN_Bancos objeto = new CN_Bancos();
@@ -188,7 +188,7 @@ namespace Capa_Presentacion
         }
 
        
-
+        //transformacion y llenado de datos del scotiabank
         public void bancoScotiabank()
         {
             objetoCN.BorrarDat();
@@ -284,6 +284,9 @@ namespace Capa_Presentacion
             var TotalDeDatos = contaraqp + contartacna;
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
+
+        //transformacion de datos y llenado interbank
+
         public void bancoInterbank()
         {
             objetoCN.BorrarDat();
@@ -367,7 +370,7 @@ namespace Capa_Presentacion
                 Lbl_Error_archivo.Text = string.Format("Nombre del Archivo no coincise debe abrir 22073390118{0}", carpeta.ToString("MMdd"));
                 LimpiarLbl();
             }
-            objetoCN.EditarTodoCampoFecha();
+            objetoCN.EditarTodoCampoFechaSolo();
             objetoCN.CeroInterbank();
 
             objetos.EjecutarInterban();
@@ -408,22 +411,36 @@ namespace Capa_Presentacion
             var TotalDeDatos = contaraqp + contartacna;
             Lbl_Total_De_Datos.Text = TotalDeDatos.ToString();
         }
+
+        //funcion para limpiar label de la pantalla
         public void LimpiarLbl()
         {
             Lbl_Total.Text = "";
+            Lbl_Monto_Consolidado.Text = "";
+            Lbl_Monto_Sapiens.Text = "";
+            Lbl_Diferencia_Dinero.Text = "";
+            Lbl_Total_Aqp.Text = "";
+            Lbl_Total_Tacna.Text = "";
+            Lbl_Total_De_Datos.Text = "";
+            Lbl_Total_Error.Text = "";
+        }
+        //botones para ejecutar el procesamiento de los bancos 
+        private void BtnBbva_Click(object sender, EventArgs e)
+        {
+            LimpiarLbl();
+            bancoBbva();
         }
 
-        private void BtnCerrar_Click_1(object sender, EventArgs e)
+        private void BtnInterbank_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            LimpiarLbl();
+            bancoInterbank();
         }
 
-        private void siguiente_Click(object sender, EventArgs e)
+        private void BtnScotiabank_Click(object sender, EventArgs e)
         {
-            FromSeleccionarDIa frm = new FromSeleccionarDIa();
-            this.Hide();
-            frm.ShowDialog();
-            this.Close();
+            LimpiarLbl();
+            bancoScotiabank();
         }
     }
 }
