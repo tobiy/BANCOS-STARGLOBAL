@@ -69,12 +69,6 @@ namespace Capa_Negocio
             tabla = objetoCD.EliminarDatosTacna();
             return tabla;
         }
-        public DataTable ErrorTacn()
-        {
-            DataTable tabla = new DataTable();
-            tabla = objetoCD.ErrorTacna();
-            return tabla;
-        }
         public DataTable FechaCobranza()
         {
             DataTable tabla = new DataTable();

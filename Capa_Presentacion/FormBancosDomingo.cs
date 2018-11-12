@@ -57,7 +57,7 @@ namespace Capa_Presentacion
             CN_Aqp_Tacna objeto = new CN_Aqp_Tacna();
             dataGridView1.DataSource = objeto.EliminarDatosAq();
         }
-        //inicializacion de consulatas para poder aptar el mensaje qdel datagridview
+        //funcion para poder capturar mensaje en un datagridwiew
         private void SumaBbvaDomingo()
         {
             CN_Bancos objeto = new CN_Bancos();

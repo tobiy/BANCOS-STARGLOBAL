@@ -4,7 +4,8 @@ using System.Data.SqlClient;
 
 namespace Capa_Datos{
     public class CD_Bancos
-    {        
+    {   
+        //instanciacion de la clase CD_CONEXION                     
         private CD_Conexion conexionA = new CD_Conexion();
         private CD_Conexion conexionT = new CD_Conexion();
 
@@ -12,7 +13,7 @@ namespace Capa_Datos{
         int cantidad = 0;        
         SqlDataReader leer;
         DataTable tabla = new DataTable();
-        //declaracion de variables para almacenar datos de una sentencia slq para ahorrar espacio en el codigo
+        //declaracion de variables para Sumar dar fechas
         string fecha = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2))";
         string FechaDomingo = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
         string FechaBcpLunes = "DECLARE @total1 float,@total2 float,@suma_total float,@FEC_REG DATETIME,@total3 float,@total4 float,@suma_total1 float,@FEC_REG1 DATETIME,@suma_total2 float SET @FEC_REG = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2)) SET @FEC_REG1 = (SELECT LTRIM(RTRIM(YEAR(GETDATE())))+'-'+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2)+'-'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
@@ -31,9 +32,7 @@ namespace Capa_Datos{
         public void EditarTodasFechasSolo()
         {
             comando.Connection = conexionA.AbrirConexionA();
-            comando.CommandText = "update TMP_BCPR set col004 =(SELECT (CONVERT(VARCHAR(10),GETDATE()-2,112)))";
-            //comando.CommandText = "update TMP_BCPR set col004 =(SELECT LTRIM(RTRIM(YEAR(GETDATE())))+RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE())-1)),2)+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-2))),2))";
-            //comando.CommandText = "update TMP_BCPR set col004 ='20181102'";
+            comando.CommandText = "update TMP_BCPR set col004 =(SELECT (CONVERT(VARCHAR(10),GETDATE()-2,112)))";          
             comando.CommandType = CommandType.Text;
 
             comando.ExecuteNonQuery();

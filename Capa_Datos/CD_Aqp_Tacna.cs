@@ -4,23 +4,27 @@ using System.Data.SqlClient;
 namespace Capa_Datos
 {
     public class CD_Aqp_Tacna
-    {        
+    {   
+        //Instanciacion de las Propiedades de la clase CD_CONEXION 
         private CD_Conexion conexionA = new CD_Conexion();
         private CD_Conexion conexionT = new CD_Conexion();
         private CD_Conexion Conexion117 = new CD_Conexion();        
 
+        //Uso de las Funciones de Sql Client
         SqlDataReader leer;
         DataTable tabla = new DataTable();
         SqlCommand comando = new SqlCommand();
+
+        //Declaracion de la variable fecha de Tipo String para las fechas de cobranza
         string fecha = "DECLARE @inicio varchar(10),@final varchar(10)set @inicio=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY((GETDATE())-getdate()))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))set @final=(SELECT LTRIM(RIGHT('0' + LTRIM(RTRIM(MONTH(GETDATE()))),2))+'/'+RIGHT('0' + LTRIM(RTRIM(DAY(GETDATE()-1))),2) +'/'+ LTRIM(RTRIM(YEAR(GETDATE()))))";
         
-        //ejecucion de procedimientos almacenados para la validacion de bancos
+        //Funciones para ejecutar procedimientos de los bancos
         public void EjecutarBbva()
         {
             comando.Connection = conexionA.AbrirConexionA();
             comando.CommandText = "SP_VALIDA_CARGOS_BBVASOL";
             comando.CommandType = CommandType.StoredProcedure;
-            comando.CommandTimeout = 250;
+            comando.CommandTimeout = 250; //Esperar hasta 250 segundos a que se procese el procedimiento almacenado
 
             comando.ExecuteNonQuery();
 
@@ -60,7 +64,7 @@ namespace Capa_Datos
             comando.Parameters.Clear();
         }       
 
-        //ejecucion de centencia sql para poder visualizar cantidad de datos que se tiene en Arequipa de cadad banco
+        //Funcion para contar cantidad de registros en cada proceso de bancos
         public DataTable SelectDatosAqp()
         {
             comando.Connection = conexionA.AbrirConexionA();
@@ -72,6 +76,7 @@ namespace Capa_Datos
             return tabla;
         }
 
+        //Funcion para cargar datos en el sapiens
         public void EjecutarSpcasAqp()
         {
             comando.Connection = conexionA.AbrirConexionA();
@@ -83,6 +88,7 @@ namespace Capa_Datos
 
             comando.Parameters.Clear();
         }
+  
 
         //contar cantidad de datos eliminados en arequipa
         public DataTable EliminarDatosAqp()
@@ -96,7 +102,7 @@ namespace Capa_Datos
             return tabla;
         }
 
-        //cantidad de errores que hay en arequipa y tacna
+        //cantidad de errores Arequipa y Tacna
         public DataTable ErrorAqp()
         {
             comando.Connection = conexionA.AbrirConexionA();
@@ -107,16 +113,23 @@ namespace Capa_Datos
             conexionA.CerrarConexionA();
             return tabla;
         }
+
+        //contar datos tacna
         public DataTable SelectDatosTacna()
         {
             comando.Connection = conexionT.AbrirConexionT();
             comando.CommandText = "SELECT [NR_COB],[NR_CONTRATO], [NR_SER_FAT], [NR_FAT], [NR_SER_NT_CRED],[NR_NT_CRED],[VL_PAG_FAT],[DT_PAG_FAT],[CD_AGTCOB],[RES],[OBS],[Moneda],[Flat1] FROM [TMP_CAS] Order by [DT_PAG_FAT]";
             comando.CommandType = CommandType.Text;
             leer = comando.ExecuteReader();
+
             tabla.Load(leer);
+
             conexionT.CerrarConexionT();
+
             return tabla;
         }
+
+        //Cargar Datos a Sapiens Tacna
         public void EjecutarSpcasTacna()
         {
             comando.Connection = conexionT.AbrirConexionT();
@@ -128,6 +141,8 @@ namespace Capa_Datos
 
             comando.Parameters.Clear();
         }
+
+        //Contar Cantidad de datos eliminados tacna
         public DataTable EliminarDatosTacna()
         {
             comando.Connection = conexionT.AbrirConexionT();
@@ -138,17 +153,8 @@ namespace Capa_Datos
             conexionT.CerrarConexionT();
             return tabla;
         }
-        public DataTable ErrorTacna()
-        {
-            comando.Connection = conexionA.AbrirConexionA();
-            comando.CommandText = "select * from TMP_CAS_ERROR";
-            comando.CommandType = CommandType.Text;
-            leer = comando.ExecuteReader();
-            tabla.Load(leer);
-            conexionA.CerrarConexionA();
-            return tabla;
-        }
-        //funcion de generacion de fecha en sql para poder correr cobranza diariamente
+
+        //Cobranza Arequipa
         public void CobranzaAqp()
         {
             comando.Connection = conexionA.AbrirConexionA();
@@ -161,6 +167,7 @@ namespace Capa_Datos
             comando.Parameters.Clear();
         }
 
+        //Cobranza Tacna
         public void CobranzaTacna()
         {
             comando.Connection = conexionT.AbrirConexionT();
@@ -173,6 +180,7 @@ namespace Capa_Datos
             comando.Parameters.Clear();
         }
 
+        //Fecha de proceso cobranza
         public DataTable FechaCobranza()
         {
             comando.Connection = conexionA.AbrirConexionA();
@@ -185,7 +193,7 @@ namespace Capa_Datos
             return tabla;
         }
 
-        //funciones creadas para poder extraer lo datos de la tabnla sql y poder llenar los excel
+        //Extraer y llenar datos en un excel
         public void ConsolidadoBbva()
         {
             comando.Connection = Conexion117.AbrirConexion117();
@@ -291,6 +299,7 @@ namespace Capa_Datos
 
             comando.Parameters.Clear();
         }
+
         //mostrar datos en el data grid view para poder asi llenar los excel
         public DataTable TablaBbva()
         {
@@ -427,6 +436,7 @@ namespace Capa_Datos
 
             comando.Parameters.Clear();
         }
+
         public void BorrarRegistroScotiabank()
         {
             comando.Connection = Conexion117.AbrirConexion117();
